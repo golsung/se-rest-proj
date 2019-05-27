@@ -46,23 +46,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@WebMvcTest(controllers = {DemoController.class})
 public class DemoControllerTests {
-    private MockMvc mockMvc;
-    
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-    
+    @Autowired private MockMvc mockMvc;
     @MockBean
     private Memberservice memberService;
     
-    @Autowired 
-    private ObjectMapper mapper;
-    
-    @Before
-    public void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
     
     private String jsonStringFromObject(Object object) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
