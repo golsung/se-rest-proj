@@ -79,10 +79,8 @@ public class DemoControllerTests2 {
 	  m.setEmail("insang@hansung.ac.kr");
 	  m.setScore(30);
 	  ResponseEntity<Member> mem = rt.postForEntity("http://localhost:8080/member", m, Member.class);
-	  
-	  HttpHeaders headers = new HttpHeaders();
-	  HttpEntity entity = new HttpEntity(headers);
-	  ResponseEntity<Void> re = rt.exchange(mem.getHeaders().getLocation(), HttpMethod.DELETE, entity, Void.class);
+
+	  ResponseEntity<Void> re = rt.exchange(mem.getHeaders().getLocation(), HttpMethod.DELETE, null, Void.class);
 	  
 	  assertEquals(HttpStatus.OK, re.getStatusCode());
 	 
