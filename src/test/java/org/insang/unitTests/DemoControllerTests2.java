@@ -57,10 +57,6 @@ import static org.hamcrest.Matchers.*;
 @SpringBootTest
 public class DemoControllerTests2 { 
 	
-  @MockBean
-  private Memberservice memberService;
-    
-
   @Test
   public void createNewMember() {
 	  TestRestTemplate rt = new TestRestTemplate();
