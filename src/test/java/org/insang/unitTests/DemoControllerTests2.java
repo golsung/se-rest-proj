@@ -65,6 +65,7 @@ public class DemoControllerTests2 {
 	  m.setEmail("insang@hansung.ac.kr");
 	  m.setScore(30);
 	  ResponseEntity<Member> mem = rt.postForEntity("http://localhost:8080/member", m, Member.class);
+	  assertEquals(HttpStatus.CREATED, mem.getStatusCode());
 	  assertEquals("insang", mem.getBody().getName());
 	  assertEquals("insang@hansung.ac.kr", mem.getBody().getEmail());
 	  assertEquals(30, mem.getBody().getScore());
