@@ -86,4 +86,27 @@ public class DemoControllerTests2 {
 	 
 	  
   }
+  @Test
+  public void getAllMembers() {
+	  TestRestTemplate rt = new TestRestTemplate();
+	  Member m1 = new Member();
+	  m1.setName("insang1");
+	  m1.setEmail("insang1@hansung.ac.kr");
+	  m1.setScore(30);
+	  ResponseEntity<Member> member1 = rt.postForEntity("http://localhost:8080/member", m1, Member.class);
+	  Member m2 = new Member();
+	  m2.setName("insang2");
+	  m2.setEmail("insang2@hansung.ac.kr");
+	  m2.setScore(40);
+	  ResponseEntity<Member> member2 = rt.postForEntity("http://localhost:8080/member", m2, Member.class);
+	  
+	  ResponseEntity<List<Member>> response = rt.exchange("http://localhost:8080/members", HttpMethod.GET, null, 
+		  new ParameterizedTypeReference<List<Member>>(){});
+	  assertEquals(HttpStatus.OK, response.getStatusCode());
+	  List<Member> members = response.getBody();
+	  assertEquals(2, members.size());
+	  assertEquals("insang1", members.get(0).getName());
+	  assertEquals("insang2", members.get(1).getName());
+
+  }
 }
