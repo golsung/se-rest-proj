@@ -76,7 +76,7 @@ public class DemoControllerTests {
     	m.setEmail("insang@hansung.ac.kr");
     	m.setScore(30);
     	m.setId(12345L);
-    	when(memberService.create(m)).thenReturn(m);
+    	when(memberService.create(any())).thenReturn(m);
     	String jsonString = this.jsonStringFromObject(m);
     	mockMvc.perform(post("/member")
     			.contentType(MediaType.APPLICATION_JSON)
